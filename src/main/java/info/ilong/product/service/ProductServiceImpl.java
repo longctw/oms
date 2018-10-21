@@ -125,7 +125,7 @@ public class ProductServiceImpl implements ProductService {
 			}
 		}
 		
-		return null;
+		return OmsResult.ok();
 	}
 
 	@Override
