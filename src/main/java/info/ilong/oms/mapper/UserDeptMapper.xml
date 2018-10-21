@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="info.ilong.oms.mapper.UserDeptMapper" >
+  <resultMap id="BaseResultMap" type="info.ilong.oms.pojo.UserDept" >
+    <id column="user_id" property="userId" jdbcType="INTEGER" />
+    <id column="dept_id" property="deptId" jdbcType="INTEGER" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="UserResultMap" type="info.ilong.oms.pojo.User" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="emp_id" property="empId" jdbcType="VARCHAR" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="fullname" property="fullname" jdbcType="VARCHAR" />
+    <result column="gender" property="gender" jdbcType="INTEGER" />
+    <result column="birthday" property="birthday" jdbcType="DATE" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="mobilephone" property="mobilephone" jdbcType="CHAR" />
+    <result column="telephone" property="telephone" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="office" property="office" jdbcType="VARCHAR" />
+    <result column="introduce" property="introduce" jdbcType="VARCHAR" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="photo" property="photo" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="register_time" property="registerTime" jdbcType="DATE" />
+    <result column="expire_time" property="expireTime" jdbcType="DATE" />
+    <result column="last_login_time" property="lastLoginTime" jdbcType="DATE" />
+    <result column="login_count" property="loginCount" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="DeptResultMap" type="info.ilong.oms.pojo.Department" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="parent_id" property="parentId" jdbcType="INTEGER" />
+    <result column="leader" property="leader" jdbcType="INTEGER" />
+    <result column="photo" property="photo" jdbcType="VARCHAR" />
+    <result column="logo" property="logo" jdbcType="VARCHAR" />
+    <result column="introduce" property="introduce" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="telephone" property="telephone" jdbcType="VARCHAR" />
+    <result column="mobilephone" property="mobilephone" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="theme" property="theme" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    user_id, dept_id, type, remark
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="info.ilong.oms.pojo.UserDeptExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_user_dept
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="info.ilong.oms.pojo.UserDeptKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_user_dept
+    where user_id = #{userId,jdbcType=INTEGER}
+      and dept_id = #{deptId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="info.ilong.oms.pojo.UserDeptKey" >
+    delete from t_user_dept
+    where user_id = #{userId,jdbcType=INTEGER}
+      and dept_id = #{deptId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="info.ilong.oms.pojo.UserDeptExample" >
+    delete from t_user_dept
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="info.ilong.oms.pojo.UserDept" >
+    insert into t_user_dept (user_id, dept_id, type, 
+      remark)
+    values (#{userId,jdbcType=INTEGER}, #{deptId,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, 
+      #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="info.ilong.oms.pojo.UserDept" >
+    insert into t_user_dept
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="deptId != null" >
+        dept_id,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="deptId != null" >
+        #{deptId,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="info.ilong.oms.pojo.UserDeptExample" resultType="java.lang.Integer" >
+    select count(*) from t_user_dept
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_user_dept
+    <set >
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.deptId != null" >
+        dept_id = #{record.deptId,jdbcType=INTEGER},
+      </if>
+      <if test="record.type != null" >
+        type = #{record.type,jdbcType=INTEGER},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_user_dept
+    set user_id = #{record.userId,jdbcType=INTEGER},
+      dept_id = #{record.deptId,jdbcType=INTEGER},
+      type = #{record.type,jdbcType=INTEGER},
+      remark = #{record.remark,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="info.ilong.oms.pojo.UserDept" >
+    update t_user_dept
+    <set >
+      <if test="type != null" >
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=INTEGER}
+      and dept_id = #{deptId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="info.ilong.oms.pojo.UserDept" >
+    update t_user_dept
+    set type = #{type,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR}
+    where user_id = #{userId,jdbcType=INTEGER}
+      and dept_id = #{deptId,jdbcType=INTEGER}
+  </update>
+  
+  <select id="selectUserByDeptId" resultMap="UserResultMap" parameterType="java.lang.Integer" >
+    select u.id, u.emp_id, u.username, u.password, u.fullname, u.gender, u.birthday, u.email, u.mobilephone, u.telephone, 
+	    u.address, u.office, u.introduce, u.title, u.photo, u.type, u.sort, u.register_time, u.expire_time, 
+	    u.last_login_time, u.login_count, u.status 
+	from 
+	t_user u LEFT JOIN t_user_dept ud on u.id = ud.user_id
+	where u.status = 1 and ud.dept_id = #{deptId,jdbcType=INTEGER}
+  </select>
+  
+    <select id="selectDeptByUserId" resultMap="DeptResultMap" parameterType="java.lang.Integer" >
+    select  
+	    d.id, d.name, d.type, d.parent_id, d.leader, d.photo, d.logo, d.introduce, d.address, d.telephone, d.mobilephone, 
+	    d.email, d.theme, d.status
+	from 
+	t_dept d LEFT JOIN t_user_dept ud on d.id = ud.dept_id
+	where d.status = 1 and ud.user_id = #{userId,jdbcType=INTEGER}
+  </select>
+  
+</mapper>

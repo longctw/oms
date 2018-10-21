@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="info.ilong.oms.mapper.ProductRelMapper" >
+  <resultMap id="BaseResultMap" type="info.ilong.oms.pojo.ProductRel" >
+    <id column="tool_id" property="toolId" jdbcType="INTEGER" />
+    <id column="piece_id" property="pieceId" jdbcType="INTEGER" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <resultMap id="ProductResultMap" type="info.ilong.oms.pojo.Product" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="descrition" property="descrition" jdbcType="VARCHAR" />
+    <result column="pro_id" property="proId" jdbcType="VARCHAR" />
+    <result column="material" property="material" jdbcType="VARCHAR" />
+    <result column="models" property="models" jdbcType="VARCHAR" />
+    <result column="specific" property="specific" jdbcType="VARCHAR" />
+    <result column="fix_content" property="fixContent" jdbcType="VARCHAR" />
+    <result column="orgin" property="orgin" jdbcType="VARCHAR" />
+    <result column="producer" property="producer" jdbcType="VARCHAR" />
+    <result column="unit" property="unit" jdbcType="VARCHAR" />
+    <result column="inprice" property="inprice" jdbcType="INTEGER" />
+    <result column="outprice" property="outprice" jdbcType="INTEGER" />
+    <result column="relation" property="relation" jdbcType="INTEGER" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="barcode" property="barcode" jdbcType="VARCHAR" />
+    <result column="image_no" property="imageNo" jdbcType="VARCHAR" />
+    <result column="image" property="image" jdbcType="VARCHAR" />
+    <result column="created" property="created" jdbcType="DATE" />
+    <result column="updated" property="updated" jdbcType="DATE" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="category_id" property="categoryId" jdbcType="INTEGER" />
+    <result column="bak1" property="bak1" jdbcType="VARCHAR" />
+    <result column="bak2" property="bak2" jdbcType="VARCHAR" />
+    <result column="bak3" property="bak3" jdbcType="VARCHAR" />
+    <result column="bak4" property="bak4" jdbcType="VARCHAR" />
+    <result column="bak5" property="bak5" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tool_id, piece_id, type, remark
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="info.ilong.oms.pojo.ProductRelExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_product_rel
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="info.ilong.oms.pojo.ProductRelKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_product_rel
+    where tool_id = #{toolId,jdbcType=INTEGER}
+      and piece_id = #{pieceId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="info.ilong.oms.pojo.ProductRelKey" >
+    delete from t_product_rel
+    where tool_id = #{toolId,jdbcType=INTEGER}
+      and piece_id = #{pieceId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="info.ilong.oms.pojo.ProductRelExample" >
+    delete from t_product_rel
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="info.ilong.oms.pojo.ProductRel" >
+    insert into t_product_rel (tool_id, piece_id, type, 
+      remark)
+    values (#{toolId,jdbcType=INTEGER}, #{pieceId,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, 
+      #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="info.ilong.oms.pojo.ProductRel" >
+    insert into t_product_rel
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="toolId != null" >
+        tool_id,
+      </if>
+      <if test="pieceId != null" >
+        piece_id,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="toolId != null" >
+        #{toolId,jdbcType=INTEGER},
+      </if>
+      <if test="pieceId != null" >
+        #{pieceId,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="info.ilong.oms.pojo.ProductRelExample" resultType="java.lang.Integer" >
+    select count(*) from t_product_rel
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_product_rel
+    <set >
+      <if test="record.toolId != null" >
+        tool_id = #{record.toolId,jdbcType=INTEGER},
+      </if>
+      <if test="record.pieceId != null" >
+        piece_id = #{record.pieceId,jdbcType=INTEGER},
+      </if>
+      <if test="record.type != null" >
+        type = #{record.type,jdbcType=INTEGER},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_product_rel
+    set tool_id = #{record.toolId,jdbcType=INTEGER},
+      piece_id = #{record.pieceId,jdbcType=INTEGER},
+      type = #{record.type,jdbcType=INTEGER},
+      remark = #{record.remark,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="info.ilong.oms.pojo.ProductRel" >
+    update t_product_rel
+    <set >
+      <if test="type != null" >
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where tool_id = #{toolId,jdbcType=INTEGER}
+      and piece_id = #{pieceId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="info.ilong.oms.pojo.ProductRel" >
+    update t_product_rel
+    set type = #{type,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR}
+    where tool_id = #{toolId,jdbcType=INTEGER}
+      and piece_id = #{pieceId,jdbcType=INTEGER}
+  </update>
+  
+    <select id="selectPieceByToolId" resultMap="ProductResultMap" parameterType="java.lang.Integer" >
+    select p.id, p.title, p.descrition, p.pro_id, p.material, p.models, p.specific, p.fix_content, p.orgin, p.producer, 
+		    p.unit, p.inprice, p.outprice, p.relation, p.type, p.barcode, p.image_no, p.image, p.created, p.updated, 
+		    p.status, p.category_id, p.bak1, p.bak2, p.bak3, p.bak4, p.bak5 
+	from 
+		t_product p LEFT JOIN t_product_rel pr on p.id = pr.piece_id
+	where p.status = 1 and pr.tool_id = #{deptId,jdbcType=INTEGER}
+  </select>
+  
+    <select id="selectToolByPieceId" resultMap="ProductResultMap" parameterType="java.lang.Integer" >
+    select p.id, p.title, p.descrition, p.pro_id, p.material, p.models, p.specific, p.fix_content, p.orgin, p.producer, 
+		    p.unit, p.inprice, p.outprice, p.relation, p.type, p.barcode, p.image_no, p.image, p.created, p.updated, 
+		    p.status, p.category_id, p.bak1, p.bak2, p.bak3, p.bak4, p.bak5 
+	from 
+		t_product p LEFT JOIN t_product_rel pr on p.id = pr.tool_id
+	where p.status = 1 and pr.piece_id = #{deptId,jdbcType=INTEGER}
+  </select>
+</mapper>

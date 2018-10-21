@@ -1,0 +1,562 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="info.ilong.oms.mapper.ProductMapper" >
+  <resultMap id="BaseResultMap" type="info.ilong.oms.pojo.Product" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="descrition" property="descrition" jdbcType="VARCHAR" />
+    <result column="pro_id" property="proId" jdbcType="VARCHAR" />
+    <result column="material" property="material" jdbcType="VARCHAR" />
+    <result column="models" property="models" jdbcType="VARCHAR" />
+    <result column="specific" property="specific" jdbcType="VARCHAR" />
+    <result column="fix_content" property="fixContent" jdbcType="VARCHAR" />
+    <result column="orgin" property="orgin" jdbcType="VARCHAR" />
+    <result column="producer" property="producer" jdbcType="VARCHAR" />
+    <result column="unit" property="unit" jdbcType="VARCHAR" />
+    <result column="inprice" property="inprice" jdbcType="INTEGER" />
+    <result column="outprice" property="outprice" jdbcType="INTEGER" />
+    <result column="relation" property="relation" jdbcType="INTEGER" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="barcode" property="barcode" jdbcType="VARCHAR" />
+    <result column="image_no" property="imageNo" jdbcType="VARCHAR" />
+    <result column="image" property="image" jdbcType="VARCHAR" />
+    <result column="created" property="created" jdbcType="DATE" />
+    <result column="updated" property="updated" jdbcType="DATE" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="category_id" property="categoryId" jdbcType="INTEGER" />
+    <result column="bak1" property="bak1" jdbcType="VARCHAR" />
+    <result column="bak2" property="bak2" jdbcType="VARCHAR" />
+    <result column="bak3" property="bak3" jdbcType="VARCHAR" />
+    <result column="bak4" property="bak4" jdbcType="VARCHAR" />
+    <result column="bak5" property="bak5" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, title, descrition, pro_id, material, models, specific, fix_content, orgin, producer, 
+    unit, inprice, outprice, relation, type, barcode, image_no, image, created, updated, 
+    status, category_id, bak1, bak2, bak3, bak4, bak5
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="info.ilong.oms.pojo.ProductExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_product
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_product
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_product
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="info.ilong.oms.pojo.ProductExample" >
+    delete from t_product
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="info.ilong.oms.pojo.Product" >
+  	
+  	<selectKey resultType="int" keyProperty="id" order="AFTER">
+  		SELECT LAST_INSERT_ID();
+  	</selectKey>
+  
+    insert into t_product (id, title, descrition, 
+      pro_id, material, models, 
+      specific, fix_content, orgin, 
+      producer, unit, inprice, 
+      outprice, relation, type, 
+      barcode, image_no, image, 
+      created, updated, status, 
+      category_id, bak1, bak2, 
+      bak3, bak4, bak5)
+    values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{descrition,jdbcType=VARCHAR}, 
+      #{proId,jdbcType=VARCHAR}, #{material,jdbcType=VARCHAR}, #{models,jdbcType=VARCHAR}, 
+      #{specific,jdbcType=VARCHAR}, #{fixContent,jdbcType=VARCHAR}, #{orgin,jdbcType=VARCHAR}, 
+      #{producer,jdbcType=VARCHAR}, #{unit,jdbcType=VARCHAR}, #{inprice,jdbcType=INTEGER}, 
+      #{outprice,jdbcType=INTEGER}, #{relation,jdbcType=INTEGER}, #{type,jdbcType=VARCHAR}, 
+      #{barcode,jdbcType=VARCHAR}, #{imageNo,jdbcType=VARCHAR}, #{image,jdbcType=VARCHAR}, 
+      #{created,jdbcType=DATE}, #{updated,jdbcType=DATE}, #{status,jdbcType=INTEGER}, 
+      #{categoryId,jdbcType=INTEGER}, #{bak1,jdbcType=VARCHAR}, #{bak2,jdbcType=VARCHAR}, 
+      #{bak3,jdbcType=VARCHAR}, #{bak4,jdbcType=VARCHAR}, #{bak5,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="info.ilong.oms.pojo.Product" >
+    insert into t_product
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="descrition != null" >
+        descrition,
+      </if>
+      <if test="proId != null" >
+        pro_id,
+      </if>
+      <if test="material != null" >
+        material,
+      </if>
+      <if test="models != null" >
+        models,
+      </if>
+      <if test="specific != null" >
+        specific,
+      </if>
+      <if test="fixContent != null" >
+        fix_content,
+      </if>
+      <if test="orgin != null" >
+        orgin,
+      </if>
+      <if test="producer != null" >
+        producer,
+      </if>
+      <if test="unit != null" >
+        unit,
+      </if>
+      <if test="inprice != null" >
+        inprice,
+      </if>
+      <if test="outprice != null" >
+        outprice,
+      </if>
+      <if test="relation != null" >
+        relation,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="barcode != null" >
+        barcode,
+      </if>
+      <if test="imageNo != null" >
+        image_no,
+      </if>
+      <if test="image != null" >
+        image,
+      </if>
+      <if test="created != null" >
+        created,
+      </if>
+      <if test="updated != null" >
+        updated,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="categoryId != null" >
+        category_id,
+      </if>
+      <if test="bak1 != null" >
+        bak1,
+      </if>
+      <if test="bak2 != null" >
+        bak2,
+      </if>
+      <if test="bak3 != null" >
+        bak3,
+      </if>
+      <if test="bak4 != null" >
+        bak4,
+      </if>
+      <if test="bak5 != null" >
+        bak5,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="descrition != null" >
+        #{descrition,jdbcType=VARCHAR},
+      </if>
+      <if test="proId != null" >
+        #{proId,jdbcType=VARCHAR},
+      </if>
+      <if test="material != null" >
+        #{material,jdbcType=VARCHAR},
+      </if>
+      <if test="models != null" >
+        #{models,jdbcType=VARCHAR},
+      </if>
+      <if test="specific != null" >
+        #{specific,jdbcType=VARCHAR},
+      </if>
+      <if test="fixContent != null" >
+        #{fixContent,jdbcType=VARCHAR},
+      </if>
+      <if test="orgin != null" >
+        #{orgin,jdbcType=VARCHAR},
+      </if>
+      <if test="producer != null" >
+        #{producer,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null" >
+        #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="inprice != null" >
+        #{inprice,jdbcType=INTEGER},
+      </if>
+      <if test="outprice != null" >
+        #{outprice,jdbcType=INTEGER},
+      </if>
+      <if test="relation != null" >
+        #{relation,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="barcode != null" >
+        #{barcode,jdbcType=VARCHAR},
+      </if>
+      <if test="imageNo != null" >
+        #{imageNo,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null" >
+        #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="created != null" >
+        #{created,jdbcType=DATE},
+      </if>
+      <if test="updated != null" >
+        #{updated,jdbcType=DATE},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="categoryId != null" >
+        #{categoryId,jdbcType=INTEGER},
+      </if>
+      <if test="bak1 != null" >
+        #{bak1,jdbcType=VARCHAR},
+      </if>
+      <if test="bak2 != null" >
+        #{bak2,jdbcType=VARCHAR},
+      </if>
+      <if test="bak3 != null" >
+        #{bak3,jdbcType=VARCHAR},
+      </if>
+      <if test="bak4 != null" >
+        #{bak4,jdbcType=VARCHAR},
+      </if>
+      <if test="bak5 != null" >
+        #{bak5,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="info.ilong.oms.pojo.ProductExample" resultType="java.lang.Integer" >
+    select count(*) from t_product
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_product
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.title != null" >
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.descrition != null" >
+        descrition = #{record.descrition,jdbcType=VARCHAR},
+      </if>
+      <if test="record.proId != null" >
+        pro_id = #{record.proId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.material != null" >
+        material = #{record.material,jdbcType=VARCHAR},
+      </if>
+      <if test="record.models != null" >
+        models = #{record.models,jdbcType=VARCHAR},
+      </if>
+      <if test="record.specific != null" >
+        specific = #{record.specific,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fixContent != null" >
+        fix_content = #{record.fixContent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgin != null" >
+        orgin = #{record.orgin,jdbcType=VARCHAR},
+      </if>
+      <if test="record.producer != null" >
+        producer = #{record.producer,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unit != null" >
+        unit = #{record.unit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inprice != null" >
+        inprice = #{record.inprice,jdbcType=INTEGER},
+      </if>
+      <if test="record.outprice != null" >
+        outprice = #{record.outprice,jdbcType=INTEGER},
+      </if>
+      <if test="record.relation != null" >
+        relation = #{record.relation,jdbcType=INTEGER},
+      </if>
+      <if test="record.type != null" >
+        type = #{record.type,jdbcType=VARCHAR},
+      </if>
+      <if test="record.barcode != null" >
+        barcode = #{record.barcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.imageNo != null" >
+        image_no = #{record.imageNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.image != null" >
+        image = #{record.image,jdbcType=VARCHAR},
+      </if>
+      <if test="record.created != null" >
+        created = #{record.created,jdbcType=DATE},
+      </if>
+      <if test="record.updated != null" >
+        updated = #{record.updated,jdbcType=DATE},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.categoryId != null" >
+        category_id = #{record.categoryId,jdbcType=INTEGER},
+      </if>
+      <if test="record.bak1 != null" >
+        bak1 = #{record.bak1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bak2 != null" >
+        bak2 = #{record.bak2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bak3 != null" >
+        bak3 = #{record.bak3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bak4 != null" >
+        bak4 = #{record.bak4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bak5 != null" >
+        bak5 = #{record.bak5,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_product
+    set id = #{record.id,jdbcType=INTEGER},
+      title = #{record.title,jdbcType=VARCHAR},
+      descrition = #{record.descrition,jdbcType=VARCHAR},
+      pro_id = #{record.proId,jdbcType=VARCHAR},
+      material = #{record.material,jdbcType=VARCHAR},
+      models = #{record.models,jdbcType=VARCHAR},
+      specific = #{record.specific,jdbcType=VARCHAR},
+      fix_content = #{record.fixContent,jdbcType=VARCHAR},
+      orgin = #{record.orgin,jdbcType=VARCHAR},
+      producer = #{record.producer,jdbcType=VARCHAR},
+      unit = #{record.unit,jdbcType=VARCHAR},
+      inprice = #{record.inprice,jdbcType=INTEGER},
+      outprice = #{record.outprice,jdbcType=INTEGER},
+      relation = #{record.relation,jdbcType=INTEGER},
+      type = #{record.type,jdbcType=VARCHAR},
+      barcode = #{record.barcode,jdbcType=VARCHAR},
+      image_no = #{record.imageNo,jdbcType=VARCHAR},
+      image = #{record.image,jdbcType=VARCHAR},
+      created = #{record.created,jdbcType=DATE},
+      updated = #{record.updated,jdbcType=DATE},
+      status = #{record.status,jdbcType=INTEGER},
+      category_id = #{record.categoryId,jdbcType=INTEGER},
+      bak1 = #{record.bak1,jdbcType=VARCHAR},
+      bak2 = #{record.bak2,jdbcType=VARCHAR},
+      bak3 = #{record.bak3,jdbcType=VARCHAR},
+      bak4 = #{record.bak4,jdbcType=VARCHAR},
+      bak5 = #{record.bak5,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="info.ilong.oms.pojo.Product" >
+    update t_product
+    <set >
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="descrition != null" >
+        descrition = #{descrition,jdbcType=VARCHAR},
+      </if>
+      <if test="proId != null" >
+        pro_id = #{proId,jdbcType=VARCHAR},
+      </if>
+      <if test="material != null" >
+        material = #{material,jdbcType=VARCHAR},
+      </if>
+      <if test="models != null" >
+        models = #{models,jdbcType=VARCHAR},
+      </if>
+      <if test="specific != null" >
+        specific = #{specific,jdbcType=VARCHAR},
+      </if>
+      <if test="fixContent != null" >
+        fix_content = #{fixContent,jdbcType=VARCHAR},
+      </if>
+      <if test="orgin != null" >
+        orgin = #{orgin,jdbcType=VARCHAR},
+      </if>
+      <if test="producer != null" >
+        producer = #{producer,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null" >
+        unit = #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="inprice != null" >
+        inprice = #{inprice,jdbcType=INTEGER},
+      </if>
+      <if test="outprice != null" >
+        outprice = #{outprice,jdbcType=INTEGER},
+      </if>
+      <if test="relation != null" >
+        relation = #{relation,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="barcode != null" >
+        barcode = #{barcode,jdbcType=VARCHAR},
+      </if>
+      <if test="imageNo != null" >
+        image_no = #{imageNo,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null" >
+        image = #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="created != null" >
+        created = #{created,jdbcType=DATE},
+      </if>
+      <if test="updated != null" >
+        updated = #{updated,jdbcType=DATE},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="categoryId != null" >
+        category_id = #{categoryId,jdbcType=INTEGER},
+      </if>
+      <if test="bak1 != null" >
+        bak1 = #{bak1,jdbcType=VARCHAR},
+      </if>
+      <if test="bak2 != null" >
+        bak2 = #{bak2,jdbcType=VARCHAR},
+      </if>
+      <if test="bak3 != null" >
+        bak3 = #{bak3,jdbcType=VARCHAR},
+      </if>
+      <if test="bak4 != null" >
+        bak4 = #{bak4,jdbcType=VARCHAR},
+      </if>
+      <if test="bak5 != null" >
+        bak5 = #{bak5,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="info.ilong.oms.pojo.Product" >
+    update t_product
+    set title = #{title,jdbcType=VARCHAR},
+      descrition = #{descrition,jdbcType=VARCHAR},
+      pro_id = #{proId,jdbcType=VARCHAR},
+      material = #{material,jdbcType=VARCHAR},
+      models = #{models,jdbcType=VARCHAR},
+      specific = #{specific,jdbcType=VARCHAR},
+      fix_content = #{fixContent,jdbcType=VARCHAR},
+      orgin = #{orgin,jdbcType=VARCHAR},
+      producer = #{producer,jdbcType=VARCHAR},
+      unit = #{unit,jdbcType=VARCHAR},
+      inprice = #{inprice,jdbcType=INTEGER},
+      outprice = #{outprice,jdbcType=INTEGER},
+      relation = #{relation,jdbcType=INTEGER},
+      type = #{type,jdbcType=VARCHAR},
+      barcode = #{barcode,jdbcType=VARCHAR},
+      image_no = #{imageNo,jdbcType=VARCHAR},
+      image = #{image,jdbcType=VARCHAR},
+      created = #{created,jdbcType=DATE},
+      updated = #{updated,jdbcType=DATE},
+      status = #{status,jdbcType=INTEGER},
+      category_id = #{categoryId,jdbcType=INTEGER},
+      bak1 = #{bak1,jdbcType=VARCHAR},
+      bak2 = #{bak2,jdbcType=VARCHAR},
+      bak3 = #{bak3,jdbcType=VARCHAR},
+      bak4 = #{bak4,jdbcType=VARCHAR},
+      bak5 = #{bak5,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
