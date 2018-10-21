@@ -108,6 +108,7 @@ public class ProductServiceImpl implements ProductService {
 		productMapper.insert(pro);
 		Integer relation = pro.getRelation();
 		
+		// 填充数据
 		if (relation == 1){
 			for (Integer pieceId : proRel){
 				ProductRel pr = new ProductRel();
