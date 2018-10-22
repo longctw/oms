@@ -15,6 +15,7 @@ G:\changeTheWorld\uas\workspace\oms\src\main\java\info\ilong\utils\EasyUITreeNod
 G:\changeTheWorld\uas\workspace\oms\src\main\java\info\ilong\oms\mapper\CategoryMapper.java
 G:\changeTheWorld\uas\workspace\oms\src\main\java\info\ilong\dept\service\DeptServiceImpl.java
 G:\changeTheWorld\uas\workspace\oms\src\main\java\info\ilong\utils\pojo\UserQuery.java
+G:\changeTheWorld\uas\workspace\oms\src\main\java\info\ilong\category\service\CategoryService.java
 G:\changeTheWorld\uas\workspace\oms\src\main\java\info\ilong\product\service\ProductService.java
 G:\changeTheWorld\uas\workspace\oms\src\main\java\info\ilong\oms\config\MyBatisConfig.java
 G:\changeTheWorld\uas\workspace\oms\src\main\java\info\ilong\oms\mapper\DepartmentMapper.java
@@ -32,9 +33,12 @@ G:\changeTheWorld\uas\workspace\oms\src\main\java\info\ilong\user\service\UserSe
 G:\changeTheWorld\uas\workspace\oms\src\main\java\info\ilong\oms\pojo\ProductExample.java
 G:\changeTheWorld\uas\workspace\oms\src\main\java\info\ilong\oms\mapper\UserDeptMapper.java
 G:\changeTheWorld\uas\workspace\oms\src\main\java\info\ilong\utils\OmsResult.java
+G:\changeTheWorld\uas\workspace\oms\src\main\java\info\ilong\category\controller\CategoryController.java
 G:\changeTheWorld\uas\workspace\oms\src\main\java\info\ilong\oms\pojo\Department.java
 G:\changeTheWorld\uas\workspace\oms\src\main\java\info\ilong\oms\pojo\ProductRelKey.java
 G:\changeTheWorld\uas\workspace\oms\src\main\java\info\ilong\oms\pojo\DepartmentExample.java
 G:\changeTheWorld\uas\workspace\oms\src\main\java\info\ilong\oms\pojo\User.java
 G:\changeTheWorld\uas\workspace\oms\src\main\java\info\ilong\utils\EasyUIResult.java
+G:\changeTheWorld\uas\workspace\oms\src\main\java\info\ilong\utils\pojo\CategoryQuery.java
+G:\changeTheWorld\uas\workspace\oms\src\main\java\info\ilong\category\service\CategoryServiceImpl.java
 G:\changeTheWorld\uas\workspace\oms\src\main\java\info\ilong\utils\pojo\ProductQuery.java

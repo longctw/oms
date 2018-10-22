@@ -66,7 +66,7 @@ public class ProductServiceImpl implements ProductService {
 		//查询商品信息，紧跟着分析信息的第一个select语句会被分页
 		ProductExample example = new ProductExample();
 		Criteria criteria = example.createCriteria();
-		query.addCriteria(criteria);
+		//query.addCriteria(criteria);
 		Integer categoryId = query.getCategoryId();
 		
 		if (categoryId != null){
@@ -130,14 +130,62 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public OmsResult updateProduct(Product product, List<Integer> proRel) {
-		// TODO Auto-generated method stub
-		return null;
+		Product orignPro = productMapper.selectByPrimaryKey(product.getId());
+		// 删除原纪录的关系
+		if (orignPro.getRelation() == 1){
+			ProductRelExample example = new ProductRelExample();
+			example.createCriteria().andToolIdEqualTo(product.getId());
+			productRelMapper.deleteByExample(example);
+		}else if (orignPro.getRelation() == 2){
+			ProductRelExample example = new ProductRelExample();
+			example.createCriteria().andPieceIdEqualTo(product.getId());
+			productRelMapper.deleteByExample(example);
+		}
+		
+		// 执行更新
+		productMapper.updateByPrimaryKeySelective(product);
+		
+		//添加新的关联关系
+		if (product.getRelation() == 1){
+			for (Integer pieceId : proRel){
+				ProductRel pr = new ProductRel();
+				pr.setToolId(product.getId());
+				pr.setPieceId(pieceId);
+				productRelMapper.insert(pr);
+			}
+		}else if (product.getRelation() == 2){
+			for (Integer toolId : proRel){
+				ProductRel pr = new ProductRel();
+				pr.setToolId(toolId);
+				pr.setPieceId(product.getId());
+				productRelMapper.insert(pr);
+			}
+		}
+		
+		return OmsResult.ok();
 	}
 
 	@Override
 	public OmsResult deleteProduct(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		// select record by pk
+		Product product = productMapper.selectByPrimaryKey(id);
+		product.setStatus(0);
+		// logic delete by update 
+		productMapper.updateByPrimaryKey(product);
+		Integer relation = product.getRelation();
+		
+		// compete product relation 
+		if (relation == 1){
+			ProductRelExample example = new ProductRelExample();
+			example.createCriteria().andToolIdEqualTo(product.getId());
+			productRelMapper.deleteByExample(example);
+		}else if (relation == 2){
+			ProductRelExample example = new ProductRelExample();
+			example.createCriteria().andPieceIdEqualTo(product.getId());
+			productRelMapper.deleteByExample(example);
+		}
+		
+		return OmsResult.ok();
 	}
 
 	private void recursiveQueryChildCate(List<Integer> cateList, int cateId){

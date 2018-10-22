@@ -89,7 +89,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, title, descrition, pro_id, material, models, specific, fix_content, orgin, producer, 
+    id, title, descrition, pro_id, material, models, `specific`, fix_content, orgin, producer, 
     unit, inprice, outprice, relation, type, barcode, image_no, image, created, updated, 
     status, category_id, bak1, bak2, bak3, bak4, bak5
   </sql>

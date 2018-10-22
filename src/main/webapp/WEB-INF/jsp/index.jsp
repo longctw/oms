@@ -29,6 +29,13 @@
 	         	</ul>
          	</li>
          	<li>
+         		<span>产品管理</span>
+         		<ul>
+	         		<li data-options="attributes:{'url':'category-product'}">产品管理</li>
+	         		<li data-options="attributes:{'url':'category'}">分类管理</li>
+	         	</ul>
+         	</li>
+         	<li>
          		<span>人事管理</span>
          		<ul>
 	         		<li data-options="attributes:{'url':'dept-user'}">员工管理</li>

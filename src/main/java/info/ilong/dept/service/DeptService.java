@@ -3,7 +3,6 @@ package info.ilong.dept.service;
 import java.util.List;
 
 import info.ilong.oms.pojo.Department;
-import info.ilong.utils.EasyUIResult;
 import info.ilong.utils.EasyUITreeNode;
 import info.ilong.utils.OmsResult;
 import info.ilong.utils.pojo.DeptQuery;

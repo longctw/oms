@@ -82,4 +82,12 @@ public class Category {
     public void setStatus(Integer status) {
         this.status = status;
     }
+    
+    public boolean isParent(){
+    	return type == 1;
+    }
+    
+    public void isParent(boolean bool){
+    	this.type = bool ? 1 : 2;
+    }
 }
