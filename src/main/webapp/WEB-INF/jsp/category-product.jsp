@@ -6,20 +6,21 @@
             </ul>
         </div>
         <div data-options="region:'center'" style="padding:5px">
-            <table class="easyui-datagrid" id="contentList" data-options="toolbar:contentListToolbar,singleSelect:false,collapsible:true,pagination:true,method:'get',pageSize:20,url:'/product/list',queryParams:{categoryId:0}">
+            <table class="easyui-datagrid" id="contentList" 
+            data-options="toolbar:contentListToolbar,singleSelect:false,
+            collapsible:true,pagination:true,method:'get',pageSize:20,url:'/product/list',queryParams:{relation:1},
+            onDblClickRow:showPiece">
 			    <thead>
 			        <tr>
-			            <!-- <th data-options="field:'id',width:30">ID</th> -->
-			            <th data-options="field:'empId',width:120">员工编号</th>
-			            <th data-options="field:'fullname',width:100">姓名</th>
-			            <th data-options="field:'gender',width:120,formatter:TAOTAO.formatGender">性别</th>
-			            <th data-options="field:'dept',width:120">部门</th>
-			            <th data-options="field:'telephone',width:100,align:'center'">电话</th>
-			            <th data-options="field:'email',width:100,align:'center'">邮箱</th>
-			            <th data-options="field:'title',width:100,align:'center'">职位</th>
-			            <th data-options="field:'birthday',width:130,align:'center',formatter:TAOTAO.formatDateTime">出生日期</th>
-			            <th data-options="field:'lastLoginTime',width:130,align:'center',formatter:TAOTAO.formatDateTime">上次登陆时间</th>
-			            <th data-options="field:'loginCount',width:130,align:'center'">登陆次数</th>
+			            <th data-options="field:'proId',width:100">产品编号</th>
+			            <th data-options="field:'title',width:150">名称</th>
+			            <th data-options="field:'categoryName',width:100">分类</th>
+			            <th data-options="field:'models',width:120">型号</th>
+			            <th data-options="field:'orgin',width:120">产地</th>
+			            <th data-options="field:'producer',width:100,">厂家</th>
+			            <th data-options="field:'inprice',width:100,align:'center',formatter:TAOTAO.formatPrice">采购价</th>
+			            <th data-options="field:'outprice',width:100,align:'center',formatter:TAOTAO.formatPrice">销售价</th>
+			            <th data-options="field:'type',width:130,align:'center'">类别</th>
 			        </tr>
 			    </thead>
 			</table>
@@ -30,13 +31,13 @@
 $(function(){
 	var tree = $("#contentCategoryTree");
 	var datagrid = $("#contentList");
+	
 	tree.tree({
 		onClick : function(node){
-			//if(tree.tree("isLeaf",node.target)){
-				datagrid.datagrid('reload', {
-					categoryId :node.id
-		        });
-			//}
+			datagrid.datagrid('reload', {
+				categoryId :node.id,
+				relation:1
+	        });
 		}
 	});
 });
@@ -85,7 +86,7 @@ var contentListToolbar = [{
     iconCls:'icon-cancel',
     handler:function(){
     	var ids = TT.getSelectionsIds("#contentList");
-    	var names = TT.getSelectionsItems("#contentList","fullname");
+    	var names = TT.getSelectionsItems("#contentList","title");
     	if(ids.length == 0){
     		$.messager.alert('提示','未选中商品!');
     		return ;
@@ -93,7 +94,7 @@ var contentListToolbar = [{
     	$.messager.confirm('确认','确定删除 '+names+' 吗？',function(r){
     	    if (r){
     	    	var params = {"ids":ids};
-            	$.post("/user/delete",params, function(data){
+            	$.post("/product/delete",params, function(data){
         			if(data.status == 200){
         				$.messager.alert('提示','删除内容成功!',undefined,function(){
         					$("#contentList").datagrid("reload");
@@ -104,6 +105,34 @@ var contentListToolbar = [{
     	});
     }
 }];
+
+function showPiece(rowIndex, rowData){
+	TT.createWindow({
+		title : rowData.title + " 的零件",
+		url : "/piece_list",
+		onLoad : function(){
+			 $('#pieceList').datagrid({
+				toolbar:pieceListToolbar,
+			    columns:[[
+			        {field:'proId',title:'产品编号',width:100},
+			        {field:'title',title:'名称',width:100},    
+			        {field:'categoryName',title:'分类',width:100},  
+			        {field:'models',title:'型号',width:100},  
+			        {field:'orgin',title:'产地',width:100},  
+			        {field:'producer',title:'厂家',width:100},  
+			        {field:'inprice',title:'采购价',width:100,formatter:TAOTAO.formatPrice},  
+			        {field:'outprice',title:'销售价',width:100,formatter:TAOTAO.formatPrice},  
+			        {field:'type',title:'类别',width:100}
+			    ]]    
+			});
+			$("#pieceList").datagrid({
+				data:rowData.pieceList
+			}); 
+		},
+		width:"50%",
+		height:"50%"
+	});
+}
 
 function format2date(d){
 	var date = new Date(d);

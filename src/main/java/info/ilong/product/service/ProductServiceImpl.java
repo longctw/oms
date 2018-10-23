@@ -66,7 +66,7 @@ public class ProductServiceImpl implements ProductService {
 		//查询商品信息，紧跟着分析信息的第一个select语句会被分页
 		ProductExample example = new ProductExample();
 		Criteria criteria = example.createCriteria();
-		//query.addCriteria(criteria);
+		query.addCriteria(criteria);
 		Integer categoryId = query.getCategoryId();
 		
 		if (categoryId != null){
@@ -80,16 +80,10 @@ public class ProductServiceImpl implements ProductService {
 		for (Product pro : list){
 			if (pro.getRelation() == 1){
 				List<Product> pieceList = productRelMapper.selectPieceByToolId(pro.getId());
-				for (Product piece : pieceList){
-					List<Product> toolList = productRelMapper.selectToolByPieceId(pro.getId());
-					piece.setToolList(toolList);
-				}
+				pro.setPieceList(pieceList);
 			}else if (pro.getRelation() == 2){
 				List<Product> toolList = productRelMapper.selectToolByPieceId(pro.getId());
-				for (Product tool : toolList){
-					List<Product> pieceList = productRelMapper.selectPieceByToolId(pro.getId());
-					tool.setToolList(pieceList);
-				}
+				pro.setToolList(toolList);
 			}
 			
 			Category category = categoryMapper.selectByPrimaryKey(pro.getCategoryId());

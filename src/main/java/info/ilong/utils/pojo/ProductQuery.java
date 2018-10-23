@@ -53,9 +53,9 @@ public class ProductQuery {
 		if (StringUtils.isNotEmpty(type)){
 			criteria.andTypeLike("%" + type + "%");
 		}
-		if (categoryId != null){
+		/*if (categoryId != null){
 			criteria.andCategoryIdEqualTo(categoryId);
-		}
+		}*/
 		if (relation != null){
 			criteria.andRelationEqualTo(relation);
 		}
