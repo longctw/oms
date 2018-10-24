@@ -45,10 +45,10 @@ public class ProductServiceImpl implements ProductService {
 			plExample.createCriteria().andToolIdEqualTo(id);
 			List<Product> pieceList = productRelMapper.selectPieceByToolId(id);
 			
-			for (Product pro : pieceList){
-				List<Product> toolList = productRelMapper.selectToolByPieceId(pro.getId());
-				pro.setToolList(toolList);
-			}
+//			for (Product pro : pieceList){
+//				List<Product> toolList = productRelMapper.selectToolByPieceId(pro.getId());
+//				pro.setToolList(toolList);
+//			}
 			
 			product.setPieceList(pieceList);
 		}
