@@ -51,7 +51,7 @@ var contentListToolbar = [{
     		return ;
     	}
     	TT.createWindow({
-			url : "/user-add",
+			url : "/product-add",
 			width:"50%",
 			height:"50%"
 		}); 

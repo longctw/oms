@@ -11,7 +11,7 @@ import org.springframework.context.annotation.PropertySource;
 import com.alibaba.druid.pool.DruidDataSource;
 
 @SpringBootApplication
-@PropertySource(value={"classpath:db.properties"})
+@PropertySource(value={"classpath:db.properties","classpath:oms.properties"})
 @ComponentScan(basePackages="info.ilong")
 public class ManagerApplication {
 	
