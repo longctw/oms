@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Implementation-Title: oms
+Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: xulon
+Implementation-Vendor-Id: info.ilong
+Build-Jdk: 1.8.0_151
+Implementation-URL: http://projects.spring.io/spring-boot/oms/
+Created-By: Maven Integration for Eclipse
+Implementation-Vendor: Pivotal Software, Inc.
+
