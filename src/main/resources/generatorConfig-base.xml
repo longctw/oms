@@ -52,9 +52,9 @@
 		</javaClientGenerator>
 		
 	
-		<table tableName="t_product" domainObjectName="Product"></table>
-		<table tableName="t_category" domainObjectName="Category"></table>
-		<table tableName="t_product_rel" domainObjectName="ProductRel"></table>
+		<table tableName="t_sys_file" domainObjectName="File"></table>
+		<!-- <table tableName="t_order" domainObjectName="Order"></table>
+		<table tableName="t_order_detail" domainObjectName="OrderDetail"></table> -->
 		<!-- <table tableName="t_dept" domainObjectName="Department"></table> -->
 		<!-- <table schema="" tableName="userjd" />
 		<table schema="" tableName="usergys" />

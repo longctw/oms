@@ -66,7 +66,7 @@
 	        <tr>
 	            <td>图片:</td>
 	            <td colspan="3">
-	            	 <a href="javascript:void(0)" class="easyui-linkbutton onePicUpload" style="width:200px">上传图片</a>
+	            	 <a href="javascript:void(0)" class="easyui-linkbutton picFileUpload" style="width:200px">上传图片</a>
 	                 <input type="hidden" name="image"/>
 	            </td>
 	        </tr>
@@ -81,7 +81,7 @@
 	var contentAddEditor ;
 	$(function(){
 		//contentAddEditor = TT.createEditor("#contentAddForm [name=content]");
-		TT.initOnePicUpload();
+		TT.initPicUpload();
 		$("#contentAddForm [name=deptIds]").val($("#contentCategoryTree").tree("getSelected").id);
 	});
 	
