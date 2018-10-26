@@ -94,7 +94,7 @@
 				}
 				//contentAddEditor.sync();
 				
-				$.post("/user/create",$("#contentAddForm").serialize(), function(data){
+				$.post("/user/update",$("#contentAddForm").serialize(), function(data){
 					if(data.status == 200){
 						$.messager.alert('提示','新增内容成功!');
     					$("#contentList").datagrid("reload");

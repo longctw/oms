@@ -1,6 +1,7 @@
 package info.ilong.oms.pojo;
 
 import java.util.Date;
+import java.util.List;
 
 public class Order {
     private Integer id;
@@ -44,6 +45,8 @@ public class Order {
     private Date expressDate;
 
     private String remark;
+    
+    private List<OrderDetail> odList;
 
     public Integer getId() {
         return id;
@@ -212,4 +215,13 @@ public class Order {
     public void setRemark(String remark) {
         this.remark = remark == null ? null : remark.trim();
     }
+
+	public List<OrderDetail> getOdList() {
+		return odList;
+	}
+
+	public void setOdList(List<OrderDetail> odList) {
+		this.odList = odList;
+	}
+	
 }

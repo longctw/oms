@@ -29,6 +29,13 @@
 	         	</ul>
          	</li>
          	<li>
+         		<span>订单管理</span>
+         		<ul>
+	         		<li data-options="attributes:{'url':'order'}">产品管理</li>
+	         		<li data-options="attributes:{'url':'category'}">订单流转</li>
+	         	</ul>
+         	</li>
+         	<li>
          		<span>产品管理</span>
          		<ul>
 	         		<li data-options="attributes:{'url':'category-product'}">产品管理</li>
